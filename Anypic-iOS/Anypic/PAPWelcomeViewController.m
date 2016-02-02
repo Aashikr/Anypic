@@ -212,9 +212,6 @@
                         if ([currentParseUser objectForKey:kPAPUserFacebookFriendsKey]) {
                             [currentParseUser removeObjectForKey:kPAPUserFacebookFriendsKey];
                         }
-                        if ([currentParseUser objectForKey:kPAPUserAlreadyAutoFollowedFacebookFriendsKey]) {
-                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] autoFollowUsers];
-                        }
                     }
                     [self processedFacebookResponse];
                 }];

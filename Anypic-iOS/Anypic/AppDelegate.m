@@ -375,17 +375,4 @@
     }];
 }
 
-
-
-- (void)autoFollowUsers {
-    firstLaunch = YES;
-    [PFCloud callFunctionInBackground:@"autoFollowUsers" withParameters:nil block:^(id object, NSError *error) {
-        if (error) {
-            NSLog(@"Error auto following users: %@", error);
-        }
-        [MBProgressHUD hideHUDForView:self.navController.presentedViewController.view animated:NO];
-        [self.homeViewController loadObjects];
-    }];
-}
-
 @end

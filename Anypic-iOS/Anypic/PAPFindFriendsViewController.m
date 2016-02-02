@@ -134,16 +134,8 @@ typedef enum {
     NSArray *facebookFriends = [[PAPCache sharedCache] facebookFriends];
 
     // Query for all friends you have on facebook and who are using the app
-    PFQuery *friendsQuery = [PFUser query];
-    [friendsQuery whereKey:kPAPUserFacebookIDKey containedIn:facebookFriends];
-
-    // Query for all Parse employees
-    NSMutableArray *parseEmployees = [[NSMutableArray alloc] initWithArray:kPAPParseEmployeeAccounts];
-    [parseEmployees removeObject:[[PFUser currentUser] objectForKey:kPAPUserFacebookIDKey]];
-    PFQuery *parseEmployeeQuery = [PFUser query];
-    [parseEmployeeQuery whereKey:kPAPUserFacebookIDKey containedIn:parseEmployees];
-
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:friendsQuery, parseEmployeeQuery, nil]];
+    PFQuery *query = [PFUser query];
+    [query whereKey:kPAPUserFacebookIDKey containedIn:facebookFriends];
     query.cachePolicy = kPFCachePolicyNetworkOnly;
 
     if (self.objects.count == 0) {
