@@ -25,6 +25,4 @@
 
 - (void)logOut;
 
-- (void)autoFollowUsers;
-
 @end

@@ -42,7 +42,9 @@
     
     // Refresh current user with server side data -- checks if user is still valid and so on
     _facebookResponseCount = 0;
-    [[PFUser currentUser] fetchInBackgroundWithTarget:self selector:@selector(refreshCurrentUserCallbackWithResult:error:)];
+    [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        [self refreshCurrentUserCallbackWithResult:object error:error];
+    }];
 }
 
 
@@ -209,9 +211,6 @@
                         
                         if ([currentParseUser objectForKey:kPAPUserFacebookFriendsKey]) {
                             [currentParseUser removeObjectForKey:kPAPUserFacebookFriendsKey];
-                        }
-                        if ([currentParseUser objectForKey:kPAPUserAlreadyAutoFollowedFacebookFriendsKey]) {
-                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] autoFollowUsers];
                         }
                     }
                     [self processedFacebookResponse];
